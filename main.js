@@ -14,23 +14,30 @@ function init()
     
     document.body.appendChild(renderer.domElement);
     
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-     cube = new THREE.Mesh( geometry, material );
+    const geometry = new THREE.BoxGeometry( 3, 3, 0.5 ); 
+    //const material = new THREE.MeshBasicMaterial( {color: "silver"} );
+    const texture = new THREE.TextureLoader().load('./textures/barktex.jpg');
+   const material = new THREE.MeshBasicMaterial( {map:texture} );
+      
+    cube = new THREE.Mesh( geometry, material );
     scene.add(cube);
     
     camera.position.z =5;
+// add floor
+
 
 }
 
 
 function animate()
 {
- 
-    cube.rotation.x += 0.01;
-    //cube.rotation.y += 0.05;
     requestAnimationFrame(animate);
     renderer.render(scene,camera);
+    //  cube.rotation.x += 0.015;
+     cube.rotation.y += 0.05;
+    //  cube.rotation.z += 0.015;
+
+   
 
     
 }
@@ -40,6 +47,6 @@ camera.updateProjectionMatrix();
 renderer.setSize(window.innerHeight, window.innerHeight);
 }
 
-//window.addEventListener('resize', onWindowResize, false );
+window.addEventListener('resize', onWindowResize, false );
 init();
 animate();
